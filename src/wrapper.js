@@ -1,5 +1,28 @@
-const promises1 = require('./promises');
-const tracer1 = require('./tracer');
+import RequestTracer from './tracer';
+
+class PromiseSettledCoordinator {
+    constructor(finished) {
+        this.finished = finished;
+        this.promises = [];
+        this.allSettled = false;
+    }
+
+    addPromise(promise) {
+        if (this.allSettled) {
+            throw Error('All promises have already been settled!');
+        }
+        this.promises.push(promise);
+        const currentLength = this.promises.length;
+        const settled = Promise.allSettled(this.promises);
+        settled.then((results) => {
+            if (currentLength === this.promises.length) {
+                this.allSettled = true;
+                this.finished(results);
+            }
+        });
+    }
+}
+exports.PromiseSettledCoordinator = PromiseSettledCoordinator;
 
 class TraceWrapper {
     constructor(event, listener, config) {
@@ -7,9 +30,9 @@ class TraceWrapper {
         this.listener = listener;
         this.waitUntilUsed = false;
         this.config = config;
-        this.tracer = new tracer1.RequestTracer(event.request, this.config);
+        this.tracer = new RequestTracer(event.request, this.config);
         this.waitUntilSpan = this.tracer.startChildSpan('waitUntil', 'worker');
-        this.settler = new promises1.PromiseSettledCoordinator(() => {
+        this.settler = new PromiseSettledCoordinator(() => {
             this.waitUntilSpan.finish();
             this.sendEvents();
         });

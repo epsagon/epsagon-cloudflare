@@ -286,4 +286,4 @@ class RequestTracer extends Span {
         return sampleRates[key] || 1;
     }
 }
-exports.RequestTracer = RequestTracer;
+export default RequestTracer;
