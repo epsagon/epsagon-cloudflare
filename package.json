@@ -1,0 +1,51 @@
+{
+  "name": "@epsagon/cloudflare",
+  "version": "0.0.0-development",
+  "description": "This package provides tracing to Cloudflare workers for the collection of distributed tracing and performance metrics.",
+  "main": "dist/index.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle --no-compress --format modern,cjs",
+    "dev": "microbundle watch --no-compress --format modern,cjs",
+    "lint:js": "eslint --max-warnings=0 ./src/ -f table --ext .js --ext .jsx",
+    "lint:js:fix": "eslint --max-warnings=0 ./src/ -f table --ext .js --ext .jsx --fix",
+    "lint": "npm run lint:js",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epsagon/epsagon-cloudflare.git"
+  },
+  "keywords": [
+    "browser tracing",
+    "epsagon",
+    "tracing",
+    "distributed-tracing",
+    "cloudflare",
+    "cloudflare workers",
+    "debugging",
+    "monitoring"
+  ],
+  "author": "Epsagon Team <support@epsagon.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/epsagon/epsagon-cloudflare/issues"
+  },
+  "homepage": "https://github.com/epsagon/epsagon-cloudflare#readme",
+  "devDependencies": {
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-json": "^1.2.1",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-react": "^7.11.0",
+    "microbundle": "^0.13.3",
+    "semantic-release": "^17.4.4"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2",
+    "uuid-parse": "^1.1.0"
+  }
+}
