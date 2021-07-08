@@ -3,6 +3,7 @@
   "version": "0.0.0-development",
   "description": "This package provides tracing to Cloudflare workers for the collection of distributed tracing and performance metrics.",
   "main": "dist/index.js",
+  "module": "dist/index.modern.js",
   "source": "src/index.js",
   "scripts": {
     "build": "microbundle --no-compress --format modern,cjs",
@@ -47,5 +48,16 @@
   "dependencies": {
     "uuid": "^8.3.2",
     "uuid-parse": "^1.1.0"
-  }
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
 }
