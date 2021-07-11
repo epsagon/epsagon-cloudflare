@@ -1,6 +1,6 @@
 import RequestTracer from './tracer';
 
-class PromiseSettledCoordinator {
+export class PromiseSettledCoordinator {
     constructor(finished) {
         this.finished = finished;
         this.promises = [];
@@ -22,7 +22,6 @@ class PromiseSettledCoordinator {
         });
     }
 }
-exports.PromiseSettledCoordinator = PromiseSettledCoordinator;
 
 class TraceWrapper {
     constructor(event, listener, config) {
@@ -148,6 +147,7 @@ function resolve(cfg) {
         sampleRates: () => 1,
         sendTraceContext: false,
         serviceName: 'worker',
+        debug: false
     };
 
     const config = Object.assign({}, configDefaults, cfg);
@@ -156,7 +156,7 @@ function resolve(cfg) {
     return config;
 }
 
-function epsagonWrapper(cfg, listener) {
+export function epsagon(cfg, listener) {
     const config = resolve(cfg);
     return new Proxy(listener, {
         apply(_target, _thisArg, argArray) {
@@ -165,5 +165,3 @@ function epsagonWrapper(cfg, listener) {
         },
     });
 }
-
-exports.epsagon = epsagonWrapper;
