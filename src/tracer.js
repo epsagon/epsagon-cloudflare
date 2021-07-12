@@ -127,8 +127,7 @@ class Span {
         return span;
     }
 }
-exports.Span = Span;
-class RequestTracer extends Span {
+export class RequestTracer extends Span {
     constructor(request, config) {
         super({
             name: 'request',
@@ -203,7 +202,10 @@ class RequestTracer extends Span {
                     name: (`${events[0].request.headers.host.replace('https://', '').split('.')[0]}-worker`),
                     type: 'cloudflare_worker',
                     operation: 'execute',
-                    metadata: { return_value: events[0].response ? events[0].response.body : null },
+                    metadata: {
+                      return_value: events[0].response ? events[0].response.body : null,
+                      debug_events: this.config.debug ? JSON.stringify(events) : null
+                    },
                 },
             };
 
