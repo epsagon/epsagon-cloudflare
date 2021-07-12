@@ -184,9 +184,8 @@ export class RequestTracer extends Span {
                     type: 'http',
                     operation: events[0].request.method,
                     metadata: {
-                        headers: events[0].request.headers,
-                        pathname: new URL(events[0].request.url).pathname,
-                        requestContext: events[0].request,
+                        'http.request.headers': events[0].request.headers,
+                        'http.request.path': new URL(events[0].request.url).pathname,
                     },
                 },
                 error_code: 0,
@@ -203,8 +202,9 @@ export class RequestTracer extends Span {
                     type: 'cloudflare_worker',
                     operation: 'execute',
                     metadata: {
-                      return_value: events[0].response ? events[0].response.body : null,
-                      debug_events: this.config.debug ? JSON.stringify(events) : null
+                      'cloudflare.return_value': events[0].response ? events[0].response.body : null,
+                      'cloudflare.requestContext': events[0].request,
+                      'cloudflare.debug_events': this.config.debug ? JSON.stringify(events) : null
                     },
                 },
             };
@@ -242,11 +242,11 @@ export class RequestTracer extends Span {
                             operation: events[i].request.method,
                             metadata: {
                                 http_trace_id: `${hexTraceId}:${spanId}:${parentSpanId}:1`,
-                                path: events[i].name,
-                                request_headers: events[i].request.headers,
-                                response_body: events[i].response.body,
-                                status: events[i].response.status,
-                                url: events[i].response.url,
+                                'http.request.path': events[i].name,
+                                'http.request.headers': events[i].request.headers,
+                                'http.resposne.body': events[i].response.body,
+                                'http.resposne.status_code': events[i].response.status,
+                                'http.url': events[i].response.url,
                             },
                         },
                         error_code: 0,
