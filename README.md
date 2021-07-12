@@ -21,7 +21,7 @@ This package provides tracing to Cloudflare Workers for the collection of distri
 
 ### Installation
 
-Installation is done via the usual `npm install @epsagon/cloudflare` or `yarn add @epsagon/cloudflare`.
+Installation is done via the usual `npm install @epsagon/cloudflare`.
 
 ### Usage
 
