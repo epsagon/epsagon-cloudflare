@@ -185,7 +185,7 @@ export class RequestTracer extends Span {
                     operation: events[0].request.method,
                     metadata: {
                         'http.request.headers': events[0].request.headers,
-                        'http.response.path': new URL(events[0].request.url).pathname,
+                        'http.request.path': new URL(events[0].request.url).pathname,
                     },
                 },
                 error_code: 0,
