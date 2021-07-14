@@ -2,13 +2,16 @@
     "extends": "airbnb",
     "env": {
         "node": true,
-        "browser": false
+        "browser": true
     },
     "plugins": [
         "json"
     ],
     "rules": {
         "no-console": "off",
+        "no-restricted-syntax": "off",
+        "import/no-named-as-default": "off",
+        "no-new": "off",
         "indent": ["error", 4],
         "function-paren-newline": ["error", "consistent"],
         "require-jsdoc": ["error", {
