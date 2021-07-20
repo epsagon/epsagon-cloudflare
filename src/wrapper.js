@@ -159,15 +159,17 @@ class TraceWrapper {
                 const promise = new Promise((resolver, reject) => {
                     responsePromise
                         .then((response) => {
-                            const clonedResponse = response.clone();
                             let responseBody;
-                            const contentType = clonedResponse.headers.get('content-type');
+                            let clonedResponse;
+                            const contentType = response.headers.get('content-type');
                             if (contentType && contentType.indexOf('application/json') !== -1) {
+                                clonedResponse = response.clone();
                                 clonedResponse.json().then((data) => {
                                     responseBody = data;
                                 });
                             }
                             if (contentType && contentType.indexOf('text/plain;charset=UTF-8') !== -1) {
+                                clonedResponse = response.clone();
                                 clonedResponse.text().then((data) => {
                                     responseBody = data;
                                 });
