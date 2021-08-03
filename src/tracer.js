@@ -118,7 +118,19 @@ class Span {
                     this.addData({ response: json });
                 });
             }
+            if (contentType && contentType.indexOf('text/html; charset=UTF-8') !== -1) {
+                this.addData({ response: json });
+            }
         }
+    }
+
+    /**
+     * Add log data to tracer
+     * @param {string} message to be added as log.
+     */
+    log(message) {
+        this.data.logs = this.data.logs || [];
+        this.data.logs.push(`${new Date().toISOString()}: ${message}`);
     }
 
     /**
@@ -265,6 +277,7 @@ export class Tracer extends Span {
                         'cloudflare.return_value': events[0].response ? events[0].response.body : null,
                         'cloudflare.requestContext': events[0].request,
                         'cloudflare.debug_events': this.config.debug ? JSON.stringify(events) : null,
+                        'cloudflare.logs': events[0].logs || [],
                     },
                 },
             };
