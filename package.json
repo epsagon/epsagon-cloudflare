@@ -43,7 +43,7 @@
     "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-react": "^7.11.0",
     "microbundle": "^0.13.3",
-    "semantic-release": "^17.4.4"
+    "semantic-release": "^19.0.3"
   },
   "dependencies": {
     "uuid": "^8.3.2",
